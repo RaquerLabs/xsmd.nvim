@@ -14,3 +14,18 @@ vim.pack.add({
 })
 require("xsmd").setup()
 ```
+
+## blink.cmp plugin
+
+This can also be used as a blink.cmp plugin:
+
+```lua
+require("blink.cmp").setup({
+  completion = {
+    documentation = { auto_show = false },
+    menu = {
+      auto_show = false,
+    },
+  }
+})
+```
