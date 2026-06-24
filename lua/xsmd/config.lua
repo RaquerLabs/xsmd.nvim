@@ -31,7 +31,8 @@ function M.get_default_config()
 					M.original_blink_regex = blink_config.completion.keyword.regex
 				end
 				if not M.original_blocked_triggers then
-					M.original_blocked_triggers = vim.deepcopy(blink_config.completion.trigger.show_on_blocked_trigger_characters)
+					M.original_blocked_triggers =
+						vim.deepcopy(blink_config.completion.trigger.show_on_blocked_trigger_characters)
 				end
 
 				local group = vim.api.nvim_create_augroup("xsmd_blink_toggle_" .. bufnr, { clear = true })
@@ -41,7 +42,7 @@ function M.get_default_config()
 					buffer = bufnr,
 					group = group,
 					callback = function()
-						blink_config.completion.keyword.regex = '[-_ ]\\|\\k'
+						blink_config.completion.keyword.regex = "[-_ ]\\|\\k"
 						blink_config.completion.trigger.show_on_blocked_trigger_characters = {}
 					end,
 				})
@@ -58,7 +59,7 @@ function M.get_default_config()
 
 				-- Apply the settings immediately for the active buffer
 				if vim.api.nvim_get_current_buf() == bufnr then
-					blink_config.completion.keyword.regex = '[-_ ]\\|\\k'
+					blink_config.completion.keyword.regex = "[-_ ]\\|\\k"
 					blink_config.completion.trigger.show_on_blocked_trigger_characters = {}
 				end
 			end
