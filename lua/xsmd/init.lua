@@ -1,5 +1,6 @@
 -- lua/xsmd/init.lua
 
+---@class Xsmd
 local M = {}
 local config_mod = require("xsmd.config")
 
