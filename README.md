@@ -1,6 +1,8 @@
 # xsmd.nvim
 
-This is a plugin that provides an easy way to use [xsmd](https://github.com/RaquerLabs/xsmd/) in neovim.
+This is a plugin that provides an easy way to use
+[xsmd](https://github.com/RaquerLabs/xsmd/)+[blink.cmp](https://github.com/saghen/blink.cmp)
+in neovim.
 
 ## Installation
 
