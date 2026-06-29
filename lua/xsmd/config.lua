@@ -17,6 +17,9 @@ function M.get_default_config()
     cmd = { "xsmd" },
     filetypes = { "markdown" },
     root_markers = { "xsmd.toml", ".git" },
+
+    single_file_support = false,
+
     settings = {},
     on_attach = function(client, bufnr)
       register_debug_command(client, bufnr)
