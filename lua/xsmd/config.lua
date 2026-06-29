@@ -14,11 +14,11 @@ end
 ---@return vim.lsp.Config
 function M.get_default_config()
   return {
+    name = "xsmd",
     cmd = { "xsmd" },
     filetypes = { "markdown" },
-    root_markers = { "xsmd.toml", ".git" },
 
-    single_file_support = false,
+    root_dir = function(filepath) return vim.fs.root(filepath, { "xsmd.toml", ".git" }) end,
 
     settings = {},
     on_attach = function(client, bufnr)
