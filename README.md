@@ -29,3 +29,27 @@ require("blink.cmp").setup({
   }
 })
 ```
+
+## pickers
+
+You can also use pickers:
+
+```lua
+vim.keymap.set("n", "<LocalLeader>f", function()
+  local lines = vim.fn.systemlist("xsmd list")
+  local items = {}
+  for _, line in ipairs(lines) do
+    if line ~= "" then
+      table.insert(items, {
+        text = line,
+        file = line,
+      })
+    end
+  end
+  Snacks.picker.pick({
+    title = "XSMD",
+    items = items,
+    format = "file",
+  })
+end, { desc = "Open XSMD picker" })
+```
