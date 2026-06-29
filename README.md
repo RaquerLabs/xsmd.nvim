@@ -37,6 +37,7 @@ You can also use pickers:
 ```lua
 vim.keymap.set("n", "<LocalLeader>f", function()
   local lines = vim.fn.systemlist("xsmd list")
+
   local items = {}
   for _, line in ipairs(lines) do
     if line ~= "" then
@@ -46,10 +47,17 @@ vim.keymap.set("n", "<LocalLeader>f", function()
       })
     end
   end
+
   Snacks.picker.pick({
-    title = "XSMD",
+    title = "xsmd Picker",
     items = items,
     format = "file",
+    confirm = function(picker, item)
+      picker:close() -- Close the picker UI safely
+      if item and item.file then
+        local markdown_link = string.format("[](/%s)", item.file)
+        vim.api.nvim_put({ markdown_link }, "c", true, true)
+      end
+    end,
   })
-end, { desc = "Open XSMD picker" })
 ```
