@@ -14,13 +14,21 @@ local config_mod = require("xsmd.config")
 ---@field cmd? string[] Override the default command to launch the server
 ---@field blink? XsmdBlinkConfig
 
---- Apply xsmd's recommended blink.cmp config. Safe to call before or after the
---- user's own `blink.cmp.setup()`: blink merges config on every setup() call.
+--- Apply xsmd's recommended blink.cmp config via blink's config callable.
+--- blink.cmp v2 setup() is one-shot: only the first call applies config, so a
+--- plugin calling setup() would either no-op (user configured first) or
+--- swallow the user's whole config (plugin ran first). The config callable
+--- merges at any time instead. Skipped when the user already customized the
+--- blocked trigger characters.
 local function configure_blink()
-  local ok, blink = pcall(require, "blink.cmp")
+  local ok, config = pcall(require, "blink.cmp.config")
   if not ok then return end
 
-  blink.setup({
+  local default_blocked = { " ", "\n", "\t" }
+  local current = config.completion.trigger.show_on_blocked_trigger_characters
+  if not vim.deep_equal(current, default_blocked) then return end
+
+  config({
     completion = {
       trigger = {
         -- Blink closes the completion menu on space by default. Unblocking it

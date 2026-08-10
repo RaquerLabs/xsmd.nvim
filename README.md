@@ -52,9 +52,15 @@ require("xsmd").setup({
 })
 ```
 
-Blink merges config on every `setup()` call, so this works before or after your
-own `blink.cmp.setup()`; if you set `completion.trigger` yourself, your values
-win.
+The plugin uses blink's config callable (`blink.cmp.config`) rather than
+`setup()`, because blink.cmp v2 `setup()` is one-shot — only the first call
+applies config. The callable merges at any time, so ordering vs. your own
+`blink.cmp.setup()` doesn't matter; if you've customized
+`show_on_blocked_trigger_characters` yourself, the plugin leaves it alone.
+
+Note for blink.cmp v2: `Blink.setup()` ignores every call after the first —
+don't call it twice (e.g. a bare `Blink.setup()` followed by a configured one
+silently drops the configured call).
 
 ## pickers
 
