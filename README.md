@@ -21,10 +21,14 @@ This can also be used as a blink.cmp plugin:
 
 ```lua
 require("blink.cmp").setup({
-  completion = {
-    documentation = { auto_show = false },
-    menu = {
-      auto_show = false,
+  sources = {
+    default = { "lsp", "path", "snippets", "buffer", "xsmd" },
+    providers = {
+      xsmd = {
+        name = "xsmd",
+        module = "xsmd.blink", -- Points to your custom source
+        score_offset = 100, -- Keep your completions at the top
+      },
     },
   }
 })
